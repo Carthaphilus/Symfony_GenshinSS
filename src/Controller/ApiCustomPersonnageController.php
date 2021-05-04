@@ -21,4 +21,16 @@ class ApiCustomPersonnageController extends AbstractController
         ]);
         return new JsonResponse($json, 200, [], true);
     }
+    
+    /**
+     * @Route("/api/custom/personnage_element", name="api_custom_personnage_element", methods="GET")
+     */
+    public function personnage_element(PersonnageRepository $personnageRepository, SerializerInterface $serializer)
+    {
+        $personnage = $personnageRepository->getPeronnageAllRef();
+        $json = $serializer->serialize($personnage, 'json', [
+            'groups' => 'personnage:read'
+        ]);
+        return new JsonResponse($json, 200, [], true);
+    }
 }

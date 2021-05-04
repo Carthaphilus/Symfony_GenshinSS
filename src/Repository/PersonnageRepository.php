@@ -47,4 +47,15 @@ class PersonnageRepository extends ServiceEntityRepository
         ;
     }
     */
+    
+    public function getPeronnageAllRef(){
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            'SELECT p, e
+            FROM App\Entity\Personnage p
+            INNER JOIN App\Entity\Element e');
+        
+        return $query->getResult();
+    }
 }
