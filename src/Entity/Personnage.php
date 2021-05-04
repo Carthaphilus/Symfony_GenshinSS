@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ApiResource(normalizationContext={"groups"={"personnage:read"}},denormalizationContext={"groups"={"personnage:write"}})
  * @ORM\Table(name="personnage", indexes={@ORM\Index(name="FK_Personnage_Arme_type", columns={"arme_type_id"}), @ORM\Index(name="FK_Personnage_Element", columns={"element_id"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\PersonnageRepository")
  */
 class Personnage {
 
