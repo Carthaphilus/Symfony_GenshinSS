@@ -60,24 +60,24 @@ class Arme
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="Niveau", inversedBy="arme")
-     * @ORM\JoinTable(name="arme_niveau",
-     *   joinColumns={
-     *     @ORM\JoinColumn(name="arme_id", referencedColumnName="arme_id")
-     *   },
-     *   inverseJoinColumns={
-     *     @ORM\JoinColumn(name="niveau_id", referencedColumnName="niveau_id")
-     *   }
-     * )
+     * @ORM\OneToMany(targetEntity="ArmeNiveau", mappedBy="arme")
      */
-    private $niveau;
+    private $arme_niveau;
+    
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\OneToMany(targetEntity="ArmeTypeStatistique", mappedBy="arme")
+     */
+    private $arme_type_statistique;
 
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->niveau = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->arme_niveau = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->arme_type_statistique = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     public function getArmeId(): ?int
@@ -132,29 +132,4 @@ class Arme
 
         return $this;
     }
-
-    /**
-     * @return Collection|Niveau[]
-     */
-    public function getNiveau(): Collection
-    {
-        return $this->niveau;
-    }
-
-    public function addNiveau(Niveau $niveau): self
-    {
-        if (!$this->niveau->contains($niveau)) {
-            $this->niveau[] = $niveau;
-        }
-
-        return $this;
-    }
-
-    public function removeNiveau(Niveau $niveau): self
-    {
-        $this->niveau->removeElement($niveau);
-
-        return $this;
-    }
-
 }

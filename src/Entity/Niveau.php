@@ -32,28 +32,27 @@ class Niveau
      * @ORM\Column(name="nb_niveau", type="integer", nullable=false)
      */
     private $nbNiveau;
+    
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\OneToMany(targetEntity="ArmeNiveau", mappedBy="niveau")
+     */
+    private $arme_niveau;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="Arme", mappedBy="niveau")
+     * @ORM\OneToMany(targetEntity="PersonnageNiveau", mappedBy="niveau")
      */
-    private $arme;
-
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     *
-     * @ORM\ManyToMany(targetEntity="Personnage", mappedBy="niveau")
-     */
-    private $personnage;
+    private $personnage_niveau;
 
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->arme = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->personnage = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->personnage_id = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     public function getNiveauId(): ?int
@@ -78,40 +77,21 @@ class Niveau
      */
     public function getArme(): Collection
     {
-        return $this->arme;
+        return $this->arme_niveau;
     }
-
-    public function addArme(Arme $arme): self
-    {
-        if (!$this->arme->contains($arme)) {
-            $this->arme[] = $arme;
-            $arme->addNiveau($this);
-        }
-
-        return $this;
-    }
-
-    public function removeArme(Arme $arme): self
-    {
-        if ($this->arme->removeElement($arme)) {
-            $arme->removeNiveau($this);
-        }
-
-        return $this;
-    }
-
+    
     /**
      * @return Collection|Personnage[]
      */
     public function getPersonnage(): Collection
     {
-        return $this->personnage;
+        return $this->personnage_niveau;
     }
 
     public function addPersonnage(Personnage $personnage): self
     {
-        if (!$this->personnage->contains($personnage)) {
-            $this->personnage[] = $personnage;
+        if (!$this->personnage_niveau->contains($personnage)) {
+            $this->personnage_niveau[] = $personnage;
             $personnage->addNiveau($this);
         }
 
@@ -120,7 +100,7 @@ class Niveau
 
     public function removePersonnage(Personnage $personnage): self
     {
-        if ($this->personnage->removeElement($personnage)) {
+        if ($this->personnage_niveau->removeElement($personnage)) {
             $personnage->removeNiveau($this);
         }
 

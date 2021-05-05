@@ -84,24 +84,16 @@ class Personnage {
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="Niveau", inversedBy="personnage")
-     * @ORM\JoinTable(name="personnage_niveau",
-     *   joinColumns={
-     *     @ORM\JoinColumn(name="personnage_id", referencedColumnName="personnage_id")
-     *   },
-     *   inverseJoinColumns={
-     *     @ORM\JoinColumn(name="niveau_id", referencedColumnName="niveau_id")
-     *   }
-     * )
+     * @ORM\OneToMany(targetEntity="PersonnageNiveau", mappedBy="personnage")
      */
-    private $niveau;
+    private $personnage_niveau;
 
     /**
      * Constructor
      */
     public function __construct() {
         $this->equipe = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->niveau = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->personnage_niveau = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     public function getPersonnageId(): ?int {
@@ -186,19 +178,19 @@ class Personnage {
      * @return Collection|Niveau[]
      */
     public function getNiveau(): Collection {
-        return $this->niveau;
+        return $this->personnage_niveau;
     }
 
     public function addNiveau(Niveau $niveau): self {
-        if (!$this->niveau->contains($niveau)) {
-            $this->niveau[] = $niveau;
+        if (!$this->personnage_niveau->contains($niveau)) {
+            $this->personnage_niveau[] = $niveau;
         }
 
         return $this;
     }
 
     public function removeNiveau(Niveau $niveau): self {
-        $this->niveau->removeElement($niveau);
+        $this->personnage_niveau->removeElement($niveau);
 
         return $this;
     }
