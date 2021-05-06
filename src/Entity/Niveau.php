@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Repository\NiveauRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use ApiPlatform\Core\Annotation\ApiResource;
@@ -53,6 +54,8 @@ class Niveau
     public function __construct()
     {
         $this->personnage_id = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->arme_niveau = new ArrayCollection();
+        $this->personnage_niveau = new ArrayCollection();
     }
 
     public function getNiveauId(): ?int
@@ -102,6 +105,66 @@ class Niveau
     {
         if ($this->personnage_niveau->removeElement($personnage)) {
             $personnage->removeNiveau($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ArmeNiveau[]
+     */
+    public function getArmeNiveau(): Collection
+    {
+        return $this->arme_niveau;
+    }
+
+    public function addArmeNiveau(ArmeNiveau $armeNiveau): self
+    {
+        if (!$this->arme_niveau->contains($armeNiveau)) {
+            $this->arme_niveau[] = $armeNiveau;
+            $armeNiveau->setNiveau($this);
+        }
+
+        return $this;
+    }
+
+    public function removeArmeNiveau(ArmeNiveau $armeNiveau): self
+    {
+        if ($this->arme_niveau->removeElement($armeNiveau)) {
+            // set the owning side to null (unless already changed)
+            if ($armeNiveau->getNiveau() === $this) {
+                $armeNiveau->setNiveau(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|PersonnageNiveau[]
+     */
+    public function getPersonnageNiveau(): Collection
+    {
+        return $this->personnage_niveau;
+    }
+
+    public function addPersonnageNiveau(PersonnageNiveau $personnageNiveau): self
+    {
+        if (!$this->personnage_niveau->contains($personnageNiveau)) {
+            $this->personnage_niveau[] = $personnageNiveau;
+            $personnageNiveau->setNiveau($this);
+        }
+
+        return $this;
+    }
+
+    public function removePersonnageNiveau(PersonnageNiveau $personnageNiveau): self
+    {
+        if ($this->personnage_niveau->removeElement($personnageNiveau)) {
+            // set the owning side to null (unless already changed)
+            if ($personnageNiveau->getNiveau() === $this) {
+                $personnageNiveau->setNiveau(null);
+            }
         }
 
         return $this;

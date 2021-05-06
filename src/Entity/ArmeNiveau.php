@@ -69,4 +69,28 @@ class ArmeNiveau
 
         return $this;
     }
+
+    public function getArme(): ?Arme
+    {
+        return $this->arme;
+    }
+
+    public function setArme(?Arme $arme): self
+    {
+        $this->arme = $arme;
+
+        return $this;
+    }
+
+    public function getNiveau(): ?Niveau
+    {
+        return $this->niveau;
+    }
+
+    public function setNiveau(?Niveau $niveau): self
+    {
+        $this->niveau = $niveau;
+
+        return $this;
+    }
 }

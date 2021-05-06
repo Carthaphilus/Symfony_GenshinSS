@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Repository\PersonnageRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use ApiPlatform\Core\Annotation\ApiResource;
@@ -191,6 +192,36 @@ class Personnage {
 
     public function removeNiveau(Niveau $niveau): self {
         $this->personnage_niveau->removeElement($niveau);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|PersonnageNiveau[]
+     */
+    public function getPersonnageNiveau(): Collection
+    {
+        return $this->personnage_niveau;
+    }
+
+    public function addPersonnageNiveau(PersonnageNiveau $personnageNiveau): self
+    {
+        if (!$this->personnage_niveau->contains($personnageNiveau)) {
+            $this->personnage_niveau[] = $personnageNiveau;
+            $personnageNiveau->setPersonnage($this);
+        }
+
+        return $this;
+    }
+
+    public function removePersonnageNiveau(PersonnageNiveau $personnageNiveau): self
+    {
+        if ($this->personnage_niveau->removeElement($personnageNiveau)) {
+            // set the owning side to null (unless already changed)
+            if ($personnageNiveau->getPersonnage() === $this) {
+                $personnageNiveau->setPersonnage(null);
+            }
+        }
 
         return $this;
     }

@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Repository\JoueurRepository;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
 

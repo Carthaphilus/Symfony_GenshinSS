@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Repository\ArmeRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use ApiPlatform\Core\Annotation\ApiResource;
@@ -129,6 +130,66 @@ class Arme
     public function setArmeType(?ArmeType $armeType): self
     {
         $this->armeType = $armeType;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ArmeNiveau[]
+     */
+    public function getArmeNiveau(): Collection
+    {
+        return $this->arme_niveau;
+    }
+
+    public function addArmeNiveau(ArmeNiveau $armeNiveau): self
+    {
+        if (!$this->arme_niveau->contains($armeNiveau)) {
+            $this->arme_niveau[] = $armeNiveau;
+            $armeNiveau->setArme($this);
+        }
+
+        return $this;
+    }
+
+    public function removeArmeNiveau(ArmeNiveau $armeNiveau): self
+    {
+        if ($this->arme_niveau->removeElement($armeNiveau)) {
+            // set the owning side to null (unless already changed)
+            if ($armeNiveau->getArme() === $this) {
+                $armeNiveau->setArme(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ArmeTypeStatistique[]
+     */
+    public function getArmeTypeStatistique(): Collection
+    {
+        return $this->arme_type_statistique;
+    }
+
+    public function addArmeTypeStatistique(ArmeTypeStatistique $armeTypeStatistique): self
+    {
+        if (!$this->arme_type_statistique->contains($armeTypeStatistique)) {
+            $this->arme_type_statistique[] = $armeTypeStatistique;
+            $armeTypeStatistique->setArme($this);
+        }
+
+        return $this;
+    }
+
+    public function removeArmeTypeStatistique(ArmeTypeStatistique $armeTypeStatistique): self
+    {
+        if ($this->arme_type_statistique->removeElement($armeTypeStatistique)) {
+            // set the owning side to null (unless already changed)
+            if ($armeTypeStatistique->getArme() === $this) {
+                $armeTypeStatistique->setArme(null);
+            }
+        }
 
         return $this;
     }

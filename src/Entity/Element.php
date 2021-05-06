@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Repository\ElementRepository;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Doctrine\ORM\Mapping as ORM;

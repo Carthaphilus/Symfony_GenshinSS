@@ -58,4 +58,40 @@ class ArmeTypeStatistique
 
         return $this;
     }
+
+    public function getArmeTypeStatistiqueId(): ?int
+    {
+        return $this->arme_type_statistique_id;
+    }
+
+    public function setValeurStat(int $valeur_stat): self
+    {
+        $this->valeur_stat = $valeur_stat;
+
+        return $this;
+    }
+
+    public function getArme(): ?Arme
+    {
+        return $this->arme;
+    }
+
+    public function setArme(?Arme $arme): self
+    {
+        $this->arme = $arme;
+
+        return $this;
+    }
+
+    public function getTypeStatistique(): ?TypeStatistique
+    {
+        return $this->type_statistique;
+    }
+
+    public function setTypeStatistique(?TypeStatistique $type_statistique): self
+    {
+        $this->type_statistique = $type_statistique;
+
+        return $this;
+    }
 }
