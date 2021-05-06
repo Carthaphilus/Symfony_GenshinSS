@@ -3,17 +3,19 @@
 namespace App\Entity;
 
 use App\Repository\ArmeNiveauRepository;
+use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
+ * @ApiResource()
  * @ORM\Entity(repositoryClass=ArmeNiveauRepository::class)
  */
 class ArmeNiveau
 {
     /**
      * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\Column(name="arme_niveau_id", type="integer", nullable=false)
      */
     private $arme_niveau_id;
     
@@ -39,7 +41,7 @@ class ArmeNiveau
      */
     private $stat_secondaire;
 
-    public function getArmenNveauId(): ?int
+    public function getArmeNiveauId(): ?int
     {
         return $this->arme_niveau_id;
     }

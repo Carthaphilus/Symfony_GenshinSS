@@ -3,9 +3,11 @@
 namespace App\Entity;
 
 use App\Repository\PersonnageNiveauRepository;
+use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
+ * @ApiResource()
  * @ORM\Entity(repositoryClass=PersonnageNiveauRepository::class)
  */
 class PersonnageNiveau

@@ -3,9 +3,11 @@
 namespace App\Entity;
 
 use App\Repository\ArmeTypeStatistiqueRepository;
+use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
+ *  @ApiResource()
  * @ORM\Entity(repositoryClass=ArmeTypeStatistiqueRepository::class)
  */
 class ArmeTypeStatistique
