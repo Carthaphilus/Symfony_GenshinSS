@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ApiResource()
  * @ORM\Table(name="joueur")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass=JoueurRepository::class)
  */
 class Joueur
 {

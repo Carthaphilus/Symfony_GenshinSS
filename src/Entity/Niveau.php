@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ApiResource()
  * @ORM\Table(name="niveau")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass=NiveauRepository::class)
  */
 class Niveau
 {

@@ -11,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ApiResource(normalizationContext={"groups"={"element:read"}},denormalizationContext={"groups"={"element:write"}})
  * @ORM\Table(name="element")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass=ElementRepository::class)
  */
 class Element
 {

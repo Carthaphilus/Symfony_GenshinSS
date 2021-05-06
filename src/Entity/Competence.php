@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ApiResource()
  * @ORM\Table(name="competence", indexes={@ORM\Index(name="FK_Personnage_Personnage_competence", columns={"personnage_id"}), @ORM\Index(name="FK_Type_competence_Personnage_competence", columns={"type_competence_id"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass=CompetenceRepository::class)
  */
 class Competence
 {

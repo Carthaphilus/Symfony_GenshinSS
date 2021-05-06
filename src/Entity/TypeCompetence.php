@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ApiResource()
  * @ORM\Table(name="type_competence")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass=TypeCompetenceRepository::class)
  */
 class TypeCompetence
 {

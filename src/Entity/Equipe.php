@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ApiResource()
  * @ORM\Table(name="equipe", indexes={@ORM\Index(name="FK_Equipe_Joueur", columns={"joueur_id"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass=EquipeRepository::class)
  */
 class Equipe
 {
