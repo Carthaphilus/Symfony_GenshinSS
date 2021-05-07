@@ -7,6 +7,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Symfony\Component\Serializer\Annotation\Groups;
+use ApiPlatform\Core\Annotation\ApiFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -15,6 +17,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ApiResource()
  * @ORM\Table(name="arme", indexes={@ORM\Index(name="FK_Arme_Arme_Type", columns={"arme_type_id"})})
  * @ORM\Entity(repositoryClass=ArmeRepository::class)
+ * @ApiFilter(SearchFilter::class, properties={"armeType": "exact"})
  */
 class Arme
 {
@@ -45,15 +48,16 @@ class Arme
      * @var int
      *
      * @ORM\Column(name="rarete", type="integer", nullable=false)
+     * @Groups({"arme:read", "armetype:read", "personnage:read"})
      */
     private $rarete;
 
     /**
      * @var \ArmeType
      *
-     * @ORM\ManyToOne(targetEntity="ArmeType")
+     * @ORM\ManyToOne(targetEntity="ArmeType", inversedBy="arme")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="arme_type_id", referencedColumnName="arme_type_id")
+     *   @ORM\JoinColumn(referencedColumnName="arme_type_id", nullable=false)
      * })
      */
     private $armeType;

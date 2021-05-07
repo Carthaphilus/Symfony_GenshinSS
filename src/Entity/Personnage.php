@@ -56,7 +56,7 @@ class Personnage {
     /**
      * @var \ArmeType
      *
-     * @ORM\ManyToOne(targetEntity="ArmeType")
+     * @ORM\ManyToOne(targetEntity="ArmeType", inversedBy="personnage")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="arme_type_id", referencedColumnName="arme_type_id")
      * })

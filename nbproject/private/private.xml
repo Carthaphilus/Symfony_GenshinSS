@@ -12,7 +12,12 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/wamp64/www/Symfony_GenshinSS/src/Controller/AddDataController.php</file>
+            <file>file:/C:/wamp64/www/Symfony_GenshinSS/src/Entity/Personnage.php</file>
+            <file>file:/C:/wamp64/www/Symfony_GenshinSS/src/Entity/Arme.php</file>
+            <file>file:/C:/wamp64/www/Symfony_GenshinSS/src/Entity/ArmeType.php</file>
+            <file>file:/C:/wamp64/www/Symfony_GenshinSS/src/Controller/ApiCustomPersonnageController.php</file>
+            <file>file:/C:/wamp64/www/Symfony_GenshinSS/src/Repository/ArmeRepository.php</file>
+            <file>file:/C:/wamp64/www/Symfony_GenshinSS/src/Controller/ApiCustomArmeController.php</file>
         </group>
     </open-files>
 </project-private>

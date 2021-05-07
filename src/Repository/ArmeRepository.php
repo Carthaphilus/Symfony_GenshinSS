@@ -47,4 +47,17 @@ class ArmeRepository extends ServiceEntityRepository
         ;
     }
     */
+    
+    public function getArmeByPersonnage(int $id){
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            'SELECT a
+            FROM App\Entity\Arme a
+            INNER JOIN App\Entity\ArmeType at
+            INNER JOIN App\Entity\Personnage p
+            WHERE p.personnageId = :id')->setParameter('id', $id);
+        
+        return $query->getResult();
+    }
 }
