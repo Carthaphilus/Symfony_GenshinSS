@@ -235,7 +235,7 @@ class AddDataController extends AbstractController
                 $personnageObject->setRarete($personnage['rarity']);
                 $personnageObject->setArmeType($dbArmeType[0]);
                 $personnageObject->setElement($dbElement[0]);
-                $personnageObject->setImage('Character_'.$personnage['name'].'_Thumb.png');
+                $personnageObject->setImage('Character_'.$personnage['name'].'_Thumb.jpeg');
                 $entityManager->persist($personnageObject);
                 $entityManager->flush();
             }
