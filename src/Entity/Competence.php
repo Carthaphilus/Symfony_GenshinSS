@@ -5,6 +5,8 @@ namespace App\Entity;
 use App\Repository\CompetenceRepository;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Core\Annotation\ApiFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 
 /**
  * Competence
@@ -12,6 +14,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ApiResource()
  * @ORM\Table(name="competence", indexes={@ORM\Index(name="FK_Personnage_Personnage_competence", columns={"personnage_id"}), @ORM\Index(name="FK_Type_competence_Personnage_competence", columns={"type_competence_id"})})
  * @ORM\Entity(repositoryClass=CompetenceRepository::class)
+ * @ApiFilter(SearchFilter::class, properties={"personnage": "exact", "typeCompetence":"exact" ,"ascension": "exact"})
  */
 class Competence
 {

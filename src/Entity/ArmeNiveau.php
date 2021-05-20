@@ -5,10 +5,13 @@ namespace App\Entity;
 use App\Repository\ArmeNiveauRepository;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Core\Annotation\ApiFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 
 /**
  * @ApiResource()
  * @ORM\Entity(repositoryClass=ArmeNiveauRepository::class)
+ * @ApiFilter(SearchFilter::class, properties={"arme": "exact", "niveau":"exact"})
  */
 class ArmeNiveau
 {

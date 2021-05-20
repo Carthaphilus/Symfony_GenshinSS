@@ -47,4 +47,14 @@ class ArmeTypeStatistiqueRepository extends ServiceEntityRepository
         ;
     }
     */
+    
+    public function getRaffinement(){
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            'SELECT DISTINCT(ats.raffinement)
+            FROM App\Entity\ArmeTypeStatistique ats');
+        
+        return $query->getResult();
+    }
 }
