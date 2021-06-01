@@ -16,6 +16,8 @@ use App\Entity\PersonnageNiveau;
 use App\Entity\ArmeNiveau;
 use App\Entity\TypeStatistique;
 use App\Entity\ArmeTypeStatistique;
+use App\Entity\Artefact;
+use App\Entity\ArtefactStatEffet;
 
 class AddDataController extends AbstractController
 {
@@ -28,7 +30,7 @@ class AddDataController extends AbstractController
         $data = file_get_contents($file); 
         $obj = json_decode($data); 
         $array = json_decode(json_encode($obj), true);
-        //dump($array['French']['talents']);
+        //dump($array['French']['artifacts']);
         $frenchData = $array['French'];
         $entityManager = $this->getDoctrine()->getManager();
 
@@ -132,7 +134,12 @@ class AddDataController extends AbstractController
             '% Dégâts attaque normal',
             '% Dégâts attaque chargé',
             'Energie élémentaire',
-            '% Dégâts additionnels'
+            '% Dégâts additionnels',
+            '% Dégâts pyro',
+            '% Dégâts surcharge',
+            '% Dégâts brûlure',
+            '% Dégâts évaporation',
+            '% Dégâts fonte',
         ];
         $armeTypeStat = [
             array(68,13,40,'R1'),
@@ -175,6 +182,15 @@ class AddDataController extends AbstractController
             array(65,6,12,'R3'),
             array(65,6,14,'R4'),
             array(65,6,16,'R5'),
+        ];
+        $artefactStatEffet = [
+            array(18,2,21),
+            array(35,13,22),
+            array(15,17,13),
+            array(40,18,14),
+            array(40,19,14),
+            array(15,20,14),
+            array(15,21,14),
         ];
 
 
@@ -355,6 +371,53 @@ class AddDataController extends AbstractController
                 $armeTypeStatistiqueObject->setValeurStat($stat[2]);
                 $armeTypeStatistiqueObject->setRaffinement($stat[3]);
                 $entityManager->persist($armeTypeStatistiqueObject);
+                $entityManager->flush();
+            }
+        }
+
+        $artefactRepository = $this->getDoctrine()->getRepository('App:Artefact');
+        $dbArtefact = $artefactRepository->findAll();
+        //dump($frenchData['weapons']);
+
+        if (!$dbArtefact) {
+            foreach($frenchData['artifacts'] as $artifact){
+                if(isset($artifact['2pc'])){
+                    $artifactObject = new Artefact();
+                    $artifactObject->setNbSetArtefact(2);
+                    $artifactObject->setLabel($artifact['name']);
+                    $artifactObject->setLabelEffet($artifact['2pc']);
+                    $entityManager->persist($artifactObject);
+                    $entityManager->flush();
+                    $artifactObject2 = new Artefact();
+                    $artifactObject2->setNbSetArtefact(4);
+                    $artifactObject2->setLabel($artifact['name']);
+                    $artifactObject2->setLabelEffet($artifact['4pc']);
+                    $entityManager->persist($artifactObject2);
+                    $entityManager->flush();
+                } else {
+                    $artifactObject = new Artefact();
+                    $artifactObject->setNbSetArtefact(1);
+                    $artifactObject->setLabel($artifact['name']);
+                    $artifactObject->setLabelEffet($artifact['1pc']);
+                    $entityManager->persist($artifactObject);
+                    $entityManager->flush();
+                }
+            }
+        }
+
+        $artefactStatEffetRepository = $this->getDoctrine()->getRepository('App:ArtefactStatEffet');
+        $dbArtefactStatEffet = $artefactStatEffetRepository->findAll();
+        //dump($frenchData['weapons']);
+
+        if (!$dbArtefactStatEffet) {
+            foreach($artefactStatEffet as $statEffet){
+                $dbArtefact = $artefactRepository->find($statEffet[2]);
+                $dbTypeStatistique = $typeStatistiqueRepository->find($statEffet[1]);
+                $artefactStatEffetObject = new ArtefactStatEffet();
+                $artefactStatEffetObject->setValeur($statEffet[0]);
+                $artefactStatEffetObject->setArtefact($dbArtefact);
+                $artefactStatEffetObject->setTypeStatistique($dbTypeStatistique);
+                $entityManager->persist($artefactStatEffetObject);
                 $entityManager->flush();
             }
         }
