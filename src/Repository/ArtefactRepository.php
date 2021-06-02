@@ -47,4 +47,30 @@ class ArtefactRepository extends ServiceEntityRepository
         ;
     }
     */
+    
+    public function getArtefact(){
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            'SELECT atf.id, atf.label
+            FROM App\Entity\Artefact atf
+            WHERE atf.nbSetArtefact = 2');
+        
+        return $query->getResult();
+    }
+    
+    public function getArtefact2($id, $label){
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            'SELECT atf.id, atf.label
+            FROM App\Entity\Artefact atf
+            WHERE atf.id <> :id AND atf.nbSetArtefact <> 4 
+            OR atf.id = (SELECT atf2.id 
+                            FROM App\Entity\Artefact atf2
+                            WHERE atf2.label = :label
+                            AND atf2.nbSetArtefact = 4)')->setParameters(array('id' => $id, 'label' => $label));
+        
+        return $query->getResult();
+    }
 }

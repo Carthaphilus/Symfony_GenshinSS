@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\ArtefactStatEffetRepository;
+use Symfony\Component\Serializer\Annotation\Groups ;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -31,10 +32,8 @@ class ArtefactStatEffet
     private $artefact;
 
     /**
-     * @ORM\ManyToOne(targetEntity=TypeStatistique::class)
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(nullable=false, name="type_statistiques_id", referencedColumnName="type_statistiques_id")
-     * })
+     * @ORM\ManyToOne(targetEntity=TypeStatistique::class, inversedBy="artefact_stat_effet")
+     * @ORM\JoinColumn(referencedColumnName="type_statistiques_id",name="type_statistiques_id",nullable=false)
      */
     private $typeStatistique;
 

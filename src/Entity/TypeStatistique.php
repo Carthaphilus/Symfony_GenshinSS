@@ -6,8 +6,11 @@ use App\Repository\TypeStatistiqueRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
+use ApiPlatform\Core\Annotation\ApiResource;
 
 /**
+ * @ApiResource()
  * @ORM\Entity(repositoryClass=TypeStatistiqueRepository::class)
  */
 class TypeStatistique
@@ -32,6 +35,13 @@ class TypeStatistique
      * @ORM\OneToMany(targetEntity="ArmeTypeStatistique", mappedBy="type_statistique")
      */
     private $arme_type_statistique;
+    
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\OneToMany(targetEntity="ArtefactStatEffet", mappedBy="typeStatistique")
+     */
+    private $artefact_stat_effet;
 
     public function __construct()
     {

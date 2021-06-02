@@ -47,4 +47,16 @@ class ArtefactStatEffetRepository extends ServiceEntityRepository
         ;
     }
     */
+    
+    public function getArtefactStatEffet($id){
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            'SELECT ase, ts.type_statistiques_id
+            FROM App\Entity\ArtefactStatEffet ase
+            JOIN ase.typeStatistique ts
+            WHERE ase.artefact = :id')->setParameter('id', $id);
+        
+        return $query->getResult();
+    }
 }
